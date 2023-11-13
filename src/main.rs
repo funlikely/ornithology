@@ -9,8 +9,8 @@ lazy_static! {
 }
 
 fn main() {
-    let start_time = Instant::now();
     let year: i32 = get_year_value();
+    let start_time = Instant::now();
     
     if *LOG_ENABLED {
 
