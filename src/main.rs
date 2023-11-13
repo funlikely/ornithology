@@ -26,21 +26,36 @@ fn generate_birth_year() -> u32 {
 fn main() {
     // Check if a command-line argument is provided
     let args: Vec<String> = env::args().collect();
+    let mut year: u16 = 1990;
+    let mut user_input;
 
     if args.len() > 1 {
         // If an argument is provided, print it
-        let user_input = &args[1];
+        user_input = args[1];
         println!("User provided input: {}", user_input);
     } else {
         // If no argument is provided, prompt the user for input
-        println!("Please enter some input:");
-        let mut user_input = String::new();
+        println!("Please enter a year:");
+        user_input  = String::new();
         io::stdin().read_line(&mut user_input).expect("Failed to read line");
 
         // Print the user input
         println!("User entered input: {}", user_input.trim());
     }
-    
+
+    let year = match string_to_integer(&user_input) {
+        Ok(parsed_value) => {
+            parsed_value
+        }
+        Err(err) => {
+            eprintln!("Error: {}", err);
+            // Set a default value or handle the error as needed
+            0
+        }
+    };
+
+    println!("User inputted Year: {}", year);
+
     let start_time = Instant::now();
 
     for _ in 0..10 {
@@ -52,5 +67,13 @@ fn main() {
     let elapsed_time = start_time.elapsed();
     println!("Execution time: {:?}", elapsed_time);
 }
+
+
+fn string_to_integer(input_string: &str) -> Result<i32, std::num::ParseIntError> {
+    let parsed_number = input_string.parse::<i32>()?;
+    Ok(parsed_number)
+}
+
+
 
 
