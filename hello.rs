@@ -18,9 +18,11 @@ fn main() {
 
 
 fn display_square_roots() {
-    
+
+    println!("display sqare roooots");
 }
 
-fn newton_rooter(f32: a, u16: n) {
-    return a / 2 + n / a
+fn newton_rooter(a: f32, n: f32) -> f32 {
+    let mut k = a / 2.0 + n / a;
+    return k;
 }
