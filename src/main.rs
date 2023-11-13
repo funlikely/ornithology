@@ -24,37 +24,11 @@ fn generate_birth_year() -> u32 {
 }
 
 fn main() {
-    // Check if a command-line argument is provided
-    let args: Vec<String> = env::args().collect();
-    let mut year: u16 = 1990;
-    let mut user_input;
+    
 
-    if args.len() > 1 {
-        // If an argument is provided, print it
-        user_input = args[1];
-        println!("User provided input: {}", user_input);
-    } else {
-        // If no argument is provided, prompt the user for input
-        println!("Please enter a year:");
-        user_input  = String::new();
-        io::stdin().read_line(&mut user_input).expect("Failed to read line");
+    let year: i32 = get_year_value();
 
-        // Print the user input
-        println!("User entered input: {}", user_input.trim());
-    }
-
-    let year = match string_to_integer(&user_input) {
-        Ok(parsed_value) => {
-            parsed_value
-        }
-        Err(err) => {
-            eprintln!("Error: {}", err);
-            // Set a default value or handle the error as needed
-            0
-        }
-    };
-
-    println!("User inputted Year: {}", year);
+    println!("$$$User inputted Year: {}", year);
 
     let start_time = Instant::now();
 
@@ -68,9 +42,41 @@ fn main() {
     println!("Execution time: {:?}", elapsed_time);
 }
 
+fn get_year_value() -> i32 {
+    // Check if a command-line argument is provided
+    let args: Vec<String> = env::args().collect();
+    let mut year: u16 = 1990;
+
+    let mut my_string: String;
+    if let Some(arg) = env::args().nth(1) {
+        my_string = arg;
+        println!("String assigned from program argument: {}", my_string);
+    } else {
+        // If no program argument, prompt user for input
+        println!("Please enter a string:");
+        my_string = String::new();
+        io::stdin().read_line(&mut my_string).expect("Failed to read line");
+        println!("String assigned from user input: {}", my_string.trim());
+    }
+
+
+    let year = match string_to_integer(&my_string) {
+        Ok(parsed_value) => {
+            parsed_value
+        }
+        Err(err) => {
+            eprintln!("Error asdf: {}", err);
+            // Set a default value or handle the error as needed
+            0
+        }
+    };
+
+    year
+}
+
 
 fn string_to_integer(input_string: &str) -> Result<i32, std::num::ParseIntError> {
-    let parsed_number = input_string.parse::<i32>()?;
+    let parsed_number = input_string.trim().parse::<i32>()?;
     Ok(parsed_number)
 }
 
