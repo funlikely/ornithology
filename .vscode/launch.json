@@ -5,26 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "lldb",
-            "request": "launch",
-            "name": "Main",
-            "program": "${workspaceFolder}/src/main.exe",
-            "args": [],
-            "cwd": "${workspaceFolder}/src"
-        },
-        {
-            "type": "lldb",
-            "request": "launch",
-            "name": "Hello",
-            "program": "${workspaceFolder}/hello.exe",
-            "args": [],
-            "cwd": "${workspaceFolder}"
-        },
-        {
             "name": "Debug Rust",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/target/debug/ornithology", // Replace with your actual project name
+            "program": "${workspaceFolder}/target/debug/ornithology",
             "args": [],
             "cwd": "${workspaceFolder}",
             //"preLaunchTask": "cargo build",
